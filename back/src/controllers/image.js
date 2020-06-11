@@ -30,6 +30,10 @@ exports.getImageURL = async(req, res, next) => {
         .then(imageURL=>{
             res.json({imageURL});
         })
+        .catch(e=>{
+            res.status(500).send('file path not found');
+            throw e;
+        })
         
     }catch(e){
         console.error(e);
