@@ -5,13 +5,19 @@ exports.createImage = async(req, res, next) => {
         const name = req.body.name;
         const value = req.body.value;
         const type = req.body.type;
-        imageService.createImage(name, type, value);
+        imageService.createImage(name, type, value)
+        .then(()=>{
+            const responseObj = {
+                msg : "success create image",
+                name
+            }
+            return res.json(responseObj);
+        })
+        .catch(e=>{
+            res.status(500).send('file path not found');
+            throw e;
+        })
         
-        const responseObj = {
-            msg : "success create image",
-            name
-        }
-        return res.json(responseObj);
     }catch(e){
         console.error(e);
         next(e);
