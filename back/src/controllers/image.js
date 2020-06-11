@@ -17,3 +17,16 @@ exports.createImage = async(req, res, next) => {
         next(e);
     }
 }
+exports.getImageURL = async(req, res, next) => {
+    try{
+        const name = req.params.name;
+        imageService.getImageURL(name)
+        .then(imageURL=>{
+            res.json({imageURL});
+        })
+        
+    }catch(e){
+        console.error(e);
+        next(e);
+    }
+}
