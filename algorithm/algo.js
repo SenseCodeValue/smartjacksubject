@@ -26,9 +26,6 @@ const PrimeNumber = class{
     }
 }
 
-//최악의 경우 loop수 :17265
-
-
 const solution = (n)=>{
     if(n%2===0){ // 혹시 인풋값에 짝수 있을 경우 처리
         console.error('홀수를 입력해 주세요!');
@@ -69,5 +66,31 @@ const solution = (n)=>{
     console.log(resultArray.join(' '));
     // console.log(max_loop); //최악의 경우
 };
+const readline = require('readline');
 
-solution(999);
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout
+});
+
+let input = [];
+let T = null;
+rl.on('line', function (line) {
+    if(!T){
+        T = parseInt(line);
+    }else{
+        input.push(parseInt(line));
+    }
+    if(T&&input.length===T){
+        rl.close();
+    }
+})
+.on('close', function () {
+    for(let i=0; i<input.length; i++){
+        solution(input[i]);
+    }
+    process.exit();
+});
+
+
+//최악의 경우 loop수 :17265
